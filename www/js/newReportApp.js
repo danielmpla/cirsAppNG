@@ -7,6 +7,28 @@ var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'NewRepo
     $scope.questionaire = NewReport.get();
     $scope.reportingAreas = ReportingAreas.get();
     $scope.timestamp = null;
+
+    $scope.capturePhoto = function (){
+        // Wird aufgerufen, wenn ein Bild erfolgreich geladen wurde
+        function onPhotoDataSuccess(imageData) {
+            $scope.questionaire.files.file[0].data = imageData;
+            $scope.questionaire.files.file[0].name = "Image.jpeg";
+
+            console.log(JSON.stringify(jsonObject));
+
+            // Zeigt das aufgenommene Bild an
+            document.getElementById("image").src = "data:image/jpeg;base64," + imageData;
+        }
+
+        // Nimmt ein Bild mit der Kamera des Geräts auf und gibt einen base64-encoded String zurück
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, destinationType: destinationType.DATA_URL });
+
+        // Wird aufgerufen wenn ein Fehler bei der Kamera passiert
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
+    };
+
     $scope.submitForm = function () {
         if($scope.timestamp != null){
             var date = new Date(Date.parse($scope.timestamp));

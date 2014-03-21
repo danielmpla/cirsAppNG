@@ -16,7 +16,7 @@
                 destinationType = navigator.camera.DestinationType;
             }
         </script>
-        <script type="text/javascript" src="../cordova.js"></script>
+        <script type="text/javascript" src="../phonegap.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js"></script>
@@ -85,8 +85,8 @@
                     <textarea ng-model="questionaire.opinionOfReporter.additionalNotes.additionalNotes" rows="6"ng-maxlength="{{questionaire.opinionOfReporter.additionalNotes.maximumOfCharacters}}" ng-required='questionaire.opinionOfReporter.additionalNotes.required'></textarea><br>
 
                     <span class="text headline">{{ questionaire.files.text }}</span><br /><!-- TODO -->
-                    <input id="imageButton" type="button" class="menuButton" onclick="capturePhoto()" value="Bild aufnehmen"><br>
-                    <img id="image" class="hidden" style="width: 85%; height: auto" src=""/><br>
+                    <input id="imageButton" type="button" class="menuButton" ng-click="capturePhoto()" value="Bild aufnehmen" ng-show="questionaire.files.file[0].name == ''"><br>
+                    <img id="image" ng-hiden="questionaire.files.file[0].name == ''" style="width: 85%; height: auto" src=""/><br>
 
                     <span class="text headline">{{ questionaire.contactInformation.text }}</span><br>
                     <textarea ng-model="questionaire.contactInformation.contactInformation" rows="6" ng-maxlength="{{questionaire.contactInformation.maximumOfCharacters}}" ng-required='questionaire.contactInformation.required'></textarea><br>
