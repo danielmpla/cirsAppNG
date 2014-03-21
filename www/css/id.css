@@ -1,0 +1,14 @@
+#wrap {
+    text-align: center;
+}
+
+#logo {
+    margin: 20px;
+    width: 186px;
+    height: 77px;
+}
+
+#backButton {
+    background-color: #FE2E2E;
+    color: white;
+}

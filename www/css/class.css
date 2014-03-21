@@ -1,0 +1,115 @@
+.menuButton {
+    background-color: #D9D9D9;
+    border: 0px;
+    width: 85%;
+
+    margin: 10px;
+    padding: 5px;
+
+    font-family: Arial, Helvetica, Verdana;
+    font-color: #000000;
+    font-size: 150%;
+    font-weight: bold;
+    color: black;
+
+    text-decoration: none;
+    text-align: center;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.commentButton {
+    background-color: #D9D9D9;
+    border: 0px;
+
+    margin: 10px;
+    padding: 5px;
+
+    font-family: Arial, Helvetica, Verdana;
+    font-color: #000000;
+    font-size: 150%;
+    font-weight: bold;
+    color: black;
+
+    text-decoration: none;
+    text-align: center;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.answerButton {
+    background-color: #D9D9D9;
+    border: 0px;
+
+    margin: 10px;
+    padding: 5px;
+
+    font-family: Arial, Helvetica, Verdana;
+    font-color: #000000;
+    font-size: 150%;
+    font-weight: bold;
+    color: black;
+
+    text-decoration: none;
+    text-align: center;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.failure {
+    border: 5px !important;
+    border-color: #FE2E2E;
+}
+
+.text {
+    font-family: Arial, Helvetica, Verdana;
+    font-size: 150%;
+    font-weight: bold;
+    color: black;
+
+    text-decoration: none;
+    text-align: center;
+}
+
+.headline {
+    color: white !important;
+}
+
+.failure-text {
+    color: #FE2E2E !important;
+}
+
+.textInput{
+    background-color: #D9D9D9;
+    background-image: none;
+    border: 0px;
+    width: 84.3%;
+    resize: none;
+    overflow: auto;
+
+    margin: 10px;
+    padding: 5px;
+
+    font-family: Arial, Helvetica, Verdana;
+    font-size: 150%;
+    font-weight: bold;
+    color: black;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}

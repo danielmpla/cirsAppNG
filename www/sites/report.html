@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="reportApp">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=yes" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+        <title>Meldung</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js"></script>
+        <!--<script type="text/javascript" src="../js/myMessages.js"></script>-->
+        <script type="text/javascript" src="../js/myMessagesApp.js"></script>
+        <script type="text/javascript" src="../js/services.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/class.css" />
+        <link rel="stylesheet" type="text/css" href="../css/element.css" />
+        <link rel="stylesheet" type="text/css" href="../css/id.css" />
+    </head>
+    <body ng-controller="reportCtrl">
+        <div id="wrap">
+            <h1 id="headline">Meldung {{id}}</h1>
+			
+            <div id="report" ng-hide="isCommenting">
+                <span class="text headline">Titel</span><br/><span class="text">{{ publication.title }}</span><br/>
+                <span class="text headline">Ereignisbeschreibung der Veröffentlichung</span><br/><span class="text">{{ publication.incidentReport }}</span><br/>
+                <span class="text headline">minimale RPZ des Meldenden</span><br/><span class="text">{{ publication.minRPZofReporter }}</span><br/>
+                <span class="text headline">durchschnittliche RPZ des Meldenden</span><br/><span class="text">{{ publication.avgRPZofReporter }}</span><br/>
+                <span class="text headline">maximale RPZ des Meldenden</span><br/><span class="text">{{ publication.maxRPZofReporter }}</span><br/>
+                <span class="text headline">minimale RPZ des QMBs</span><br/><span class="text">{{ publication.minRPZofQMB }}</span><br/>
+                <span class="text headline">durchschnittliche RPZ des QMBs</span><br/><span class="text">{{ publication.avgRPZofQMB }}</span><br/>
+                <span class="text headline">maximale RPZ des QMBs</span><br/><span class="text">{{ publication.maxRPZofQMB }}</span><br/>
+                <span class="text headline">Begründung der Differenz zwischen den RPZs des Meldenden und denen des QMBs</span><br/><span class="text">{{ publication.differenceStatement }}</span><br/>
+                <span class="text headline">Kategorie der Veröffentlichung</span><br/><span class="text">{{ publication.category }}</span><br/>
+                <span class="text headline">Maßnahme der Veröffentlichung</span><br/><span class="text">{{ publication.action }}</span><br/>
+
+                <div ng-repeat="comment in comments.comment">
+
+                    <span class="text">Autor: {{comment.author}}</span><br/>
+                    <span class="text">Zeit: {{comment.timeStamp}}</span><br/>
+                    <span class="text">Kommentar:<br/>{{comment.text}}</span><br/>
+
+                    <input type="button" class="answerButton" ng-click="addComment()" ng-hide="comment.id == null" ng-model="answerComment" value="Antworten"/><br/>
+
+                    <div ng-hide="comment.comment == null" ng-repeat="answer in comment.comment"> <!-- TODO how many comment layers are allowed -->
+
+                        <span class="text">Autor: {{answer.author}}</span><br/>
+                        <span class="text">Zeit: {{answer.timeStamp}}</span><br/>
+                        <span class="text">Antwort:<br/>{{answer.text}}</span><br/>
+
+                    </div>
+
+                </div>
+
+                <input type="button" class="commentButton" ng-click="addComment()" value="Kommentieren"/><br/>
+
+            </div>
+            <div id="comment" ng-show="isCommenting">
+
+                <div ng-hide="answerComment == null">
+                    <span class="text">Autor: {{answerComment.author}}</span><br/>
+                    <span class="text">Zeit: {{answerComment.timeStamp}}</span><br/>
+                    <span class="text">Kommentar:<br/>{{answerComment.text}}</span><br/>
+                </div>
+
+                <span class="text">Autor:</span><br/>
+                <input type="text" name="name" ng-model="userComment.author"><br/>
+                <span class="text">Kommentar:</span><br/>
+                <textarea id="commentText" rows="6" ng-model="userComment.comment"></textarea><br/>
+
+                <input class="menuButton" type="submit" value="Absenden" ng-click="sendComment()">
+            </div>
+			
+            <a href="../index.html">
+                <input id="backButton" class="menuButton" type="button" value="Hauptmenü" onclick=""><br />
+            </a>
+
+            <img id="logo" src="../img/risikous.png">
+        </div>
+    </body>
+</html>

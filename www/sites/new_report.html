@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app="newReportApp">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=yes" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+        <title>Neue Meldung</title>
+        <script type="text/javascript">
+            function onLoad(){
+                document.addEventListener("deviceready",onDeviceReady,false);
+            }
+            // device APIs are available
+            function onDeviceReady() {
+                pictureSource = navigator.camera.PictureSourceType;
+                destinationType = navigator.camera.DestinationType;
+            }
+        </script>
+        <script type="text/javascript" src="../cordova.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js"></script>
+        <script type="text/javascript" src="../js/newReportApp.js"></script>
+        <script type="text/javascript" src="../js/services.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/class.css" />
+        <link rel="stylesheet" type="text/css" href="../css/element.css" />
+        <link rel="stylesheet" type="text/css" href="../css/id.css" />
+    </head>
+    <body onload="onLoad()" ng-controller="newReportCtrl">
+        <div id="wrap">
+            <h1>Neue Meldung</h1>
+
+            <div id="report" style="text-align:center">
+                <form ng-submit="submitForm()">
+                    <span class="text headline">{{ questionaire.reportingArea.text }}<br>
+                    </span><select ng-model="questionaire.reportingArea.reportingArea" ng-options="reportingArea.shortcut as reportingArea.name for reportingArea in reportingAreas.reportingArea"></select><br>
+
+                    <span class="text headline">{{ questionaire.incidentDescription.text }}</span><br>
+                    <textarea ng-model="questionaire.incidentDescription.incidentDescription" rows="6" ng-maxlength="{{questionaire.incidentDescription.maximumOfCharacters}}" ng-required='questionaire.incidentDescription.required'></textarea><br>
+
+                    <span class="text headline">{{ questionaire.riskEstimation.text }}</span><br />
+                    <span class="text">{{ questionaire.riskEstimation.detectionRating.text }}</span><br />
+                    <input id="lowDetectionRating" class="bad" type="radio" name="detectionRating" value="3" ng-model="questionaire.riskEstimation.detectionRating.detectionRating">
+                    <label class="bad" for="lowDetectionRating">Niedrig</label>
+                    <input id="normalDetectionRating" class="normal" type="radio" name="detectionRating" value="2" ng-model="questionaire.riskEstimation.detectionRating.detectionRating" checked>
+                    <label class="normal" for="normalDetectionRating">Mittel</label>
+                    <input id="highDetectionRating" class="good" type="radio" name="detectionRating" value="1" ng-model="questionaire.riskEstimation.detectionRating.detectionRating">
+                    <label class="good" for="highDetectionRating">Hoch</label><br />
+
+                    <span class="text">{{ questionaire.riskEstimation.occurrenceRating.text }}</span><br />
+                    <input id="highOccurenceRating" class="bad" type="radio" name="occurrenceRating" value="3" ng-model="questionaire.riskEstimation.occurrenceRating.occurrenceRating">
+                    <label class="bad" for="highOccurenceRating">Hoch</label>
+                    <input id="normalOccurenceRating" class="normal" type="radio" name="occurrenceRating" value="2" ng-model="questionaire.riskEstimation.occurrenceRating.occurrenceRating" checked>
+                    <label class="normal" for="normalOccurenceRating">Mittel</label>
+                    <input id="lowOccurenceRating" class="good" type="radio" name="occurrenceRating" value="1" ng-model="questionaire.riskEstimation.occurrenceRating.occurrenceRating">
+                    <label class="good" for="lowOccurenceRating">Niedrig</label><br />
+
+                    <span class="text">{{ questionaire.riskEstimation.significance.text }}</span><br />
+                    <input id="highSignificance" class="bad" type="radio" name="significance" value="3" ng-model="questionaire.riskEstimation.significance.significance">
+                    <label class="bad" for="highSignificance">Hoch</label>
+                    <input id="normalSignificance" class="normal" type="radio" name="significance" value="2" ng-model="questionaire.riskEstimation.significance.significance" checked>
+                    <label class="normal" for="normalSignificance">Mittel</label>
+                    <input id="lowSignificance" class="good" type="radio" name="significance" value="1" ng-model="questionaire.riskEstimation.significance.significance">
+                    <label class="good" for="lowSignificance">Niedrig</label><br />
+
+                    <span class="text headline">{{ questionaire.pointOfTime.text }}</span><br />
+                    <input type="datetime-local" id="datetimeBox" class="textInput" data-clear-btn="false" value="" ng-model="data.pointOfTime.pointOfTime"><br />
+
+                    <span class="text headline">{{ questionaire.location.text }}</span><br>
+                    <textarea ng-model="questionaire.location.location" rows="6" ng-maxlength="{{questionaire.location.maximumOfCharacters}}" ng-required='questionaire.location.required'></textarea><br>
+
+                    <span class="text headline">{{ questionaire.immediateMeasure.text }}</span><br>
+                    <textarea ng-model="questionaire.immediateMeasure.immediateMeasure" rows="6" ng-maxlength="{{questionaire.immediateMeasure.maximumOfCharacters}}" ng-required='questionaire.immediateMeasure.required'></textarea><br>
+
+                    <span class="text headline">{{ questionaire.consequences.text }}</span><br>
+                    <textarea ng-model="questionaire.consequences.consequences" rows="6" ng-maxlength="{{questionaire.consequences.maximumOfCharacters}}" ng-required='questionaire.consequences.required'></textarea><br>
+
+                    <span class="text headline">{{ questionaire.opinionOfReporter.text }}</span><br>
+                    <span class="text">{{ questionaire.opinionOfReporter.organisationalFactors.text }}</span><br />
+                    <textarea ng-model="questionaire.opinionOfReporter.organisationalFactors.organisationalFactors" rows="6"ng-maxlength="{{questionaire.opinionOfReporter.organisationalFactors.maximumOfCharacters}}" ng-required='questionaire.opinionOfReporter.organisationalFactors.required'></textarea><br>
+                    <span class="text">{{ questionaire.opinionOfReporter.personalFactors.text }}</span><br />
+                    <textarea ng-model="questionaire.opinionOfReporter.personalFactors.personalFactors" rows="6"ng-maxlength="{{questionaire.opinionOfReporter.personalFactors.maximumOfCharacters}}" ng-required='questionaire.opinionOfReporter.personalFactors.required'></textarea><br>
+                    <span class="text">{{ questionaire.opinionOfReporter.additionalNotes.text }}</span><br />
+                    <textarea ng-model="questionaire.opinionOfReporter.additionalNotes.additionalNotes" rows="6"ng-maxlength="{{questionaire.opinionOfReporter.additionalNotes.maximumOfCharacters}}" ng-required='questionaire.opinionOfReporter.additionalNotes.required'></textarea><br>
+
+                    <span class="text headline">{{ questionaire.files.text }}</span><br /><!-- TODO -->
+                    <input id="imageButton" type="button" class="menuButton" onclick="capturePhoto()" value="Bild aufnehmen"><br>
+                    <img id="image" class="hidden" style="width: 85%; height: auto" src=""/><br>
+
+                    <span class="text headline">{{ questionaire.contactInformation.text }}</span><br>
+                    <textarea ng-model="questionaire.contactInformation.contactInformation" rows="6" ng-maxlength="{{questionaire.contactInformation.maximumOfCharacters}}" ng-required='questionaire.contactInformation.required'></textarea><br>
+
+                    <input class="menuButton" type="submit" value="Absenden">
+                </form>
+            </div>
+            <div id="reportAnswer" class="hidden"></div>
+
+            <a href="../index.html">
+                <input id="backButton" class="menuButton" type="button" value="Hauptmenü" onclick=""><br />
+            </a>
+
+            <img id="logo" src="../img/risikous.png">
+        </div>
+    </body>
+</html>

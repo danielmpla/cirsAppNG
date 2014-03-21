@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=yes" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+        <title>Hauptmenü</title>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/class.css" />
+        <link rel="stylesheet" type="text/css" href="css/element.css" />
+        <link rel="stylesheet" type="text/css" href="css/id.css" />
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>Hauptmenü</h1>
+
+            <!-- NEUE MELDUNG -->
+            <a href="sites/new_report.html">
+                <input class="menuButton" type="button" value="Neue Meldung" onclick=""><br />
+            </a>
+
+            <!-- MEINE MELDUNGEN 
+            <a href="sites/my_reports.html">
+                <input class="menuButton" type="button" value="Meine Meldungen" onclick=""><br />
+            </a>
+            -->
+            <!-- ALLE MELDUNGEN -->
+            <a href="sites/all_reports.html">
+                <input class="menuButton" type="button" value="Alle Meldungen" onclick=""><br />
+            </a>
+
+            <!-- EINSTELLUNGEN -->
+            <div style="min-height:30px;"></div>
+            <a href="sites/options.html">
+                <input class="menuButton" type="button" value="Einstellungen" onclick=""><br />
+            </a>
+
+            <img id="logo" src="img/risikous.png">
+        </div>
+    </body>
+</html>
