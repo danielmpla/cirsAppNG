@@ -48,7 +48,7 @@ var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'NewRepo
         })
             .success(function(data, status, headers, config){
                 alert("Ihre Daten wurden erfolgreich gespeichert!\nIhre Reportnummer lautet: " + data.number);
-                window.location.href = "127.0.0.1";
+                window.location.href = "../index.html";
             })
             .error(function(data, status, headers, config){
 
