@@ -14,6 +14,13 @@ var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'NewRepo
             headers: {
                 "Content-Type" : "application/json"
             }
-        });
+        })
+            .success(function(data, status, headers, config){
+                alert("Ihre Daten wurden erfolgreich gespeichert!\nIhre Reportnummer lautet: " + data.number);
+                window.location.href = "127.0.0.1";
+            })
+            .error(function(data, status, headers, config){
+
+            });
     }
 }]);
