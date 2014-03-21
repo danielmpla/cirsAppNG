@@ -21,7 +21,7 @@ var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'NewRepo
         }
 
         // Nimmt ein Bild mit der Kamera des Geräts auf und gibt einen base64-encoded String zurück
-        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.DATA_URL });
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, destinationType: navigator.camera.DestinationType });
 
         // Wird aufgerufen wenn ein Fehler bei der Kamera passiert
         function onFail(message) {
