@@ -65,7 +65,7 @@
                     <label class="good" for="lowSignificance">Niedrig</label><br />
 
                     <span class="text headline">{{ questionaire.pointOfTime.text }}</span><br />
-                    <input type="datetime-local" id="datetimeBox" class="textInput" data-clear-btn="false" value="" ng-model="data.pointOfTime.pointOfTime"><br />
+                    <input type="datetime-local" id="datetimeBox" class="textInput" data-clear-btn="false" value="" ng-model="timestamp"><br />
 
                     <span class="text headline">{{ questionaire.location.text }}</span><br>
                     <textarea ng-model="questionaire.location.location" rows="6" ng-maxlength="{{questionaire.location.maximumOfCharacters}}" ng-required='questionaire.location.required'></textarea><br>
