@@ -41,9 +41,16 @@ myMessagesApp.controller('reportCtrl', ['$scope', 'ReportService', 'ServerLocati
                 headers: {
                     "Content-Type" : "application/json"
                 }
-            }).error(function(data) {
-                alert("Fehler: " + JSON.stringify(data));
-                return;
+            })
+                .error(function(data) {
+                    alert("Fehler: " + JSON.stringify(data));
+            })
+                .success(function (data){
+                    alert("Ihr Kommentar wurde erfolgreich gespeichert");
+                    $scope.isCommenting = false;
+                    $scope.answerComment = null;
+                    $scope.userComment = {};
+                    $scope.comments = ReportService.getReportComments($scope.serverLocation, {id: $scope.id});
             });
         } else {
             $scope.userComment.id = $scope.answerComment.id;
