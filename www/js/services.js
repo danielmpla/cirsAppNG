@@ -1,74 +1,79 @@
 /**
  * Created by Daniel on 19.03.14.
  */
-var allReportsServices = angular.module('allReportsServices', ['ngResource']);
+var allReportsServices = angular.module('allReportsServices', ['ngResource', 'ngCookies']);
 
 allReportsServices.factory('AllReports', ['$resource',
     function($resource){
-        var restURL = 'http://141.46.136.3:8080/RisikousRESTful/rest/publications';
+        var restURL = '/RisikousRESTful/rest/publications';
 
-        return $resource(restURL, {'get': {method:'GET', transformResponse: function (data) {
-            return data.publication;
-        }
-        }});
+        var allReportsService = {
+            getAllReports: function(serverLocation){
+                return $resource('http://' + serverLocation.address + ':' + serverLocation.port + restURL, {'get': {method:'GET'}}).get();
+            }
+        };
+
+        return allReportsService;
     }
 ]);
 
-allReportsServices.factory('Report', ['$resource',
+allReportsServices.factory('ReportService', ['$resource',
     function($resource){
-        var restURL = 'http://141.46.136.3:8080/RisikousRESTful/rest/publication/id/:id';
+        var restURL = '/RisikousRESTful/rest/';
 
-        return $resource(restURL, {'get': {method:'GET', id:'@id', isArray: false
-        }});
+        var reportServices = {
+            getReport: function(serverLocation, param){
+                return $resource('http://' + serverLocation.address + ':' + serverLocation.port + restURL + 'publication/id/:id', {'get': {method:'GET', id:'@id', isArray: false}}).get(param);
+            },
+            getReportComments: function(serverLocation, param){
+               return $resource('http://' + serverLocation.address + ':' + serverLocation.port + restURL + 'comments/id/:id', {'get': {method: 'GET', id:'@id', isArray: false}}).get(param);
+            }
+        };
+
+        return reportServices;
     }
 ]);
 
-allReportsServices.factory('ReportComments', ['$resource',
+allReportsServices.factory('NewReportService', ['$resource',
     function($resource){
-        var restURL = 'http://141.46.136.3:8080/RisikousRESTful/rest/comments/id/:id';
+        var restURL = '/RisikousRESTful/rest/';
 
-        return $resource(restURL,
-            {'get': {method: 'GET', id:'@id', isArray: false}}
-        );
+        var newReportService = {
+            getNewReport: function(serverLocation){
+                return $resource('http://' + serverLocation.address + ':' + serverLocation.port + restURL + 'questionnaire', {'get': {method: 'GET'}}).get();
+            },
+            getReportingAreas: function(serverLocation){
+                return $resource('http://' + serverLocation.address + ':' + serverLocation.port + restURL + 'reportingareas', {'get': {method: 'GET'}}).get();
+            }
+        };
+
+        return newReportService;
     }
 ]);
 
-allReportsServices.factory('ReportAddComment', ['$resource',//TODO
-    function($resource){
-        var restURL = 'http://141.46.136.3:8080/RisikousRESTful/rest/comments/id/:id';
+allReportsServices.factory('ServerLocation', ['$cookieStore', function ($cookieStore){
 
-        return $resource(restURL,
-            {'get': {method: 'GET', id:'@id', isArray: false}}
-        );
-    }
-]);
+    var dbConnection = {
+        saveLocationToDatabase: function (locationObject){
+            $cookieStore.put("address", locationObject.address);
+            $cookieStore.put("port", locationObject.port);
+            alert("Ihre Einstellungen wurden erfolgreich gespeichert!");
+            },
 
-allReportsServices.factory('ReportAddAnswer', ['$resource',//TODO
-    function($resource){
-        var restURL = 'http://141.46.136.3:8080/RisikousRESTful/rest/comments/id/:id';
+        getLocation: function (){
+                var address = $cookieStore.get("address");
+                var port = $cookieStore.get("port");
 
-        return $resource(restURL,
-            {'get': {method: 'GET', id:'@id', isArray: false}}
-        );
-    }
-]);
+                if(address == null){
+                    $cookieStore.put("address", "141.46.136.3");
+                    $cookieStore.put("port", "8080");
+                    address = $cookieStore.get("address");
+                    port = $cookieStore.get("port");
+                }
 
-allReportsServices.factory('NewReport', ['$resource',
-    function($resource){
-        var restURL = 'http://141.46.136.3:8080/RisikousRESTful/rest/questionnaire';
+                return {"address": address, "port": port};
+            }
+    };
 
-        return $resource(restURL,
-            {'get': {method: 'GET'}}
-        );
-    }
-]);
-
-allReportsServices.factory('ReportingAreas', ['$resource',
-    function($resource){
-        var restURL = 'http://141.46.136.3:8080/RisikousRESTful/rest/reportingareas';
-
-        return $resource(restURL,
-            {'get': {method: 'GET'}}
-        );
-    }
-]);
+    return dbConnection;
+}]);

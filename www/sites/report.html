@@ -9,6 +9,7 @@
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-cookies.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js"></script>
         <!--<script type="text/javascript" src="../js/myMessages.js"></script>-->
         <script type="text/javascript" src="../js/myMessagesApp.js"></script>
@@ -40,7 +41,7 @@
                     <span class="text">Zeit: {{comment.timeStamp}}</span><br/>
                     <span class="text">Kommentar:<br/>{{comment.text}}</span><br/>
 
-                    <input type="button" class="answerButton" ng-click="addComment()" ng-hide="comment.id == null" ng-model="answerComment" value="Antworten"/><br/>
+                    <input type="button" class="answerButton" ng-click="addComment(comment)" ng-hide="comment.id == null" value="Antworten"/><br/>  <!-- TODO check ng-model -->
 
                     <div ng-hide="comment.comment == null" ng-repeat="answer in comment.comment"> <!-- TODO how many comment layers are allowed -->
 

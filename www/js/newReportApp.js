@@ -3,9 +3,11 @@
  */
 var newReportApp = angular.module('newReportApp', ['allReportsServices']);
 
-var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'NewReport', '$http', 'ReportingAreas', function($scope, NewReport, $http, ReportingAreas){
-    $scope.questionaire = NewReport.get();
-    $scope.reportingAreas = ReportingAreas.get();
+var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'ServerLocation', 'NewReportService', '$http', function($scope, ServerLocation, NewReportService, $http){
+    $scope.serverLocation = ServerLocation.getLocation();
+
+    $scope.questionaire = NewReportService.getNewReport($scope.serverLocation);
+    $scope.reportingAreas = NewReportService.getReportingAreas($scope.serverLocation);
     $scope.timestamp = null;
 
     $scope.capturePhoto = function (){
@@ -60,9 +62,10 @@ var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'NewRepo
             $scope.questionaire.pointOfTime.date.date = day + "." + month + "." + year;
             $scope.questionaire.pointOfTime.time.time = hours + ":" + minutes;
         }
+
         $http({
             method: "POST",
-            url: "http://141.46.136.3:8080/RisikousRESTful/rest/questionnaire/addQuestionnaire",
+            url: "http://" + $scope.serverLocation.address + ":" + $scope.serverLocation.port + "/RisikousRESTful/rest/questionnaire/addQuestionnaire",
             data :JSON.stringify($scope.questionaire),
             headers: {
                 "Content-Type" : "application/json"
@@ -73,7 +76,7 @@ var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'NewRepo
                 window.location.href = "../index.html";
             })
             .error(function(data, status, headers, config){
-
+                alert("Error: " + JSON.stringify(data));
             });
     }
 }]);

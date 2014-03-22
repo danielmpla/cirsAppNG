@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="optionsApp">
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=yes" />
@@ -7,19 +7,23 @@
 
         <title>Einstellungen</title>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script type="text/javascript" src="../js/options.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-cookies.min.js"></script>
+        <script type="text/javascript" src="../js/services.js"></script>
+        <script type="text/javascript" src="../js/optionsApp.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/class.css" />
         <link rel="stylesheet" type="text/css" href="../css/element.css" />
         <link rel="stylesheet" type="text/css" href="../css/id.css" />
     </head>
-    <body>
+    <body ng-controller="optionsCtrl">
         <div id="wrap">
             <h1>Einstellungen</h1>
 
-            <span class="text">Adresse</span><br/><textarea type="text" id="url" rows="1"></textarea><br/>
-            <span class="text">Port</span><br/><textarea type="text" id="port" rows="1"></textarea><br/>
+            <span class="text">Adresse</span><br/><textarea type="text" rows="1" ng-model="serverLocation.address"></textarea><br/>
+            <span class="text">Port</span><br/><textarea type="text" rows="1" ng-model="serverLocation.port"></textarea><br/>
 
-            <input class="menuButton" type="button" value="Speichern" onclick="saveLocationToDatabase()"><br />
+            <input class="menuButton" type="button" value="Speichern" ng-click="saveServerLocation()"><br />
 
             <a href="../index.html">
                 <input id="backButton" class="menuButton" type="button" value="Hauptmenü" onclick=""><br />
