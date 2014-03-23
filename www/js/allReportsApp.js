@@ -3,10 +3,9 @@
  */
 var allReportsApp = angular.module('allReportsApp', ['ngRoute', 'allReportsServices']);
 
-allReportsApp.controller('allReportsCtrl', ['$scope', 'AllReports', 'ServerLocation',
-    function($scope, AllReports, ServerLocation){
-        $scope.serverLocation = ServerLocation.getLocation($scope);
-        $scope.publications = AllReports.getAllReports($scope.serverLocation);
+allReportsApp.controller('allReportsCtrl', ['$scope', 'AllReportsService',
+    function($scope, AllReportsService){
+        $scope.publications = AllReportsService.getAllReports();
     }
 ]);
 
