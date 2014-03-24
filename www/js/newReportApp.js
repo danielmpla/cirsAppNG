@@ -11,7 +11,7 @@ var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'NewRepo
 
     $scope.capturePhoto = function (){
 
-        NewReportService.capturePhoto().done(function (imageData) {
+        NewReportService.capturePicture().done(function (imageData) {
             $scope.questionaire.files.file[0].data = imageData;
             $scope.questionaire.files.file[0].name = "Image.jpeg";
 
