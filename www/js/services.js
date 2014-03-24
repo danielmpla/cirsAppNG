@@ -100,7 +100,9 @@ allReportsServices.factory('NewReportService', ['$resource', 'ServerLocation', '
                 return ParserService.timestampToDateTimeStringObject(timestamp);
             },
             capturePicture: function(){
-                PictureService.capturePicture();
+                PictureService.capturePicture().done(function (imageData){
+                    return imageData;
+                });
             }
         };
 
