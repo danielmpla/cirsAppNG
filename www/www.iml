@@ -6,6 +6,11 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="angular-cookies" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="angular" level="application" />
+    <orderEntry type="library" name="angular-resource" level="application" />
+    <orderEntry type="library" name="angular-cookies" level="application" />
+    <orderEntry type="library" name="angular-route" level="application" />
   </component>
 </module>
 
