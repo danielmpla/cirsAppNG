@@ -100,9 +100,7 @@ allReportsServices.factory('NewReportService', ['$resource', 'ServerLocation', '
                 return ParserService.timestampToDateTimeStringObject(timestamp);
             },
             capturePicture: function(){
-                PictureService.capturePicture().done(function (imageData){
-                    return imageData;
-                });
+                PictureService.capturePicture();
             }
         };
 
@@ -162,7 +160,10 @@ allReportsServices.factory('PictureService', function(){
     function onPhotoDataSuccess(imageData) {
         console.log(JSON.stringify(jsonObject));
 
-        return imageData;
+        newReportCtrl.scope().questionaire.files.file[0].data = imageData;
+        newReportCtrl.scope().questionaire.files.file[0].name = "Image.jpeg";
+
+        document.getElementById("image").src = "data:image/jpeg;base64," + imageData;
     }
 
     // Wird aufgerufen wenn ein Fehler bei der Kamera passiert
