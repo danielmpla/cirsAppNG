@@ -158,8 +158,8 @@ allReportsServices.factory('PictureService', function(){
 
     // Wird aufgerufen, wenn ein Bild erfolgreich geladen wurde
     function onPhotoDataSuccess(imageData) {
-        newReportCtrl.scope().questionaire.files.file[0].data = imageData;
-        newReportCtrl.scope().questionaire.files.file[0].name = "Image.jpeg";
+        angular.element("body").scope().$apply(angular.element("body").scope().questionaire.files.file[0].data = imageData);
+        angular.element("body").scope().questionaire.files.file[0].name = "Image.jpeg";
 
         document.getElementById("image").src = "data:image/jpeg;base64," + imageData;
     }
