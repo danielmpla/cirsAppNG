@@ -158,8 +158,6 @@ allReportsServices.factory('PictureService', function(){
 
     // Wird aufgerufen, wenn ein Bild erfolgreich geladen wurde
     function onPhotoDataSuccess(imageData) {
-        console.log(JSON.stringify(jsonObject));
-
         newReportCtrl.scope().questionaire.files.file[0].data = imageData;
         newReportCtrl.scope().questionaire.files.file[0].name = "Image.jpeg";
 
