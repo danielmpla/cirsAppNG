@@ -4,9 +4,9 @@
 
 var myMessagesApp = angular.module('reportApp', ['allReportsServices']);
 
-myMessagesApp.controller('reportCtrl', ['$scope', 'ReportService', function($scope, ReportService){
+myMessagesApp.controller('reportCtrl', ['$scope', 'ReportService', function ($scope, ReportService) {
 
-    $scope.id =  window.location.search.substring(1).split("&")[0].split("=")[1];
+    $scope.id = window.location.search.substring(1).split("&")[0].split("=")[1];
 
     $scope.publication = ReportService.getReport({id: $scope.id});
 
@@ -25,7 +25,7 @@ myMessagesApp.controller('reportCtrl', ['$scope', 'ReportService', function($sco
 
     $scope.sendComment = function () {
 
-        function success(){
+        function success() {
             alert("Ihr Kommentar wurde erfolgreich gespeichert");
             $scope.isCommenting = false;
             $scope.answerComment = null;
@@ -33,33 +33,29 @@ myMessagesApp.controller('reportCtrl', ['$scope', 'ReportService', function($sco
             $scope.comments = ReportService.getReportComments($scope.serverLocation, {id: $scope.id});
         }
 
-        function error(data){
+        function error(data) {
             alert("Fehler: " + JSON.stringify(data));
         }
 
-        if($scope.userComment.author == null){
+        if ($scope.userComment.author == null) {
             $scope.userComment.author = "";
         }
 
-        if($scope.answerComment == null){
+        if ($scope.answerComment == null) {
             $scope.userComment.id = $scope.id;
 
-            ReportService.sendComment($scope.userComment).done(function (successArray){
-               if(successArray[0]){
-                   success();
-               } else {
-                   error(successArray[1]);
-               }
+            ReportService.sendComment($scope.userComment).success(function (data) {
+                success();
+            }).error(function (data) {
+                error(data);
             });
         } else {
             $scope.userComment.id = $scope.answerComment.id;
 
-            ReportService.sendAnswer($scope.userComment).done(function (successArray){
-                if(successArray[0]){
-                    success();
-                } else {
-                    error(successArray[1]);
-                }
+            ReportService.sendAnswer($scope.userComment).success(function (data) {
+                success();
+            }).error(function (data) {
+                error(data);
             });
         }
     };

@@ -31,36 +31,24 @@ allReportsServices.factory('ReportService', ['$resource', 'ServerLocation', '$ht
                return $resource('http://' + serverLocation.address + ':' + serverLocation.port + restURL + 'comments/id/:id', {'get': {method: 'GET', id:'@id', isArray: false}}).get(param);
             },
             sendComment: function(comment){
-                $http({
+                return $http({
                     method: "POST",
                     url: "http://" + serverLocation.address + ":" + serverLocation.port + "/RisikousRESTful/rest/publication/addComment",
                     data :JSON.stringify(comment),
                     headers: {
                         "Content-Type" : "application/json"
                     }
-                })
-                    .success(function(data){
-                        return [true, data];
-                    })
-                    .error(function(data) {
-                        return [false, data];
-                    })
+                });
             },
             sendAnswer: function(answer){
-                $http({
+                return $http({
                     method: "POST",
                     url: "http://" + serverLocation.address + ":" + serverLocation.port + "/RisikousRESTful/rest/comment/addAnswer",
                     data :JSON.stringify(answer),
                     headers: {
                         "Content-Type" : "application/json"
                     }
-                })
-                    .error(function(data) {
-                        return [false, data];
-                    })
-                    .success(function (data){
-                        return [true, data];
-                    });
+                });
             }
         };
 
@@ -81,20 +69,14 @@ allReportsServices.factory('NewReportService', ['$resource', 'ServerLocation', '
                 return $resource('http://' + serverLocation.address + ':' + serverLocation.port + restURL + 'reportingareas', {'get': {method: 'GET'}}).get();
             },
             sendReport: function(report){
-                $http({
+                return $http({
                     method: "POST",
                     url: "http://" + serverLocation.address + ":" + serverLocation.port + "/RisikousRESTful/rest/questionnaire/addQuestionnaire",
                     data :JSON.stringify(report),
                     headers: {
                         "Content-Type" : "application/json"
                     }
-                })
-                    .success(function(data, status, headers, config){
-                        return true;
-                    })
-                    .error(function(data, status, headers, config){
-                        return false;
-                    });
+                });
             },
             timestampToStringObject: function(timestamp){
                 return ParserService.timestampToDateTimeStringObject(timestamp);
@@ -158,7 +140,7 @@ allReportsServices.factory('PictureService', function(){
 
     // Wird aufgerufen, wenn ein Bild erfolgreich geladen wurde
     function onPhotoDataSuccess(imageData) {
-        angular.element("body").scope().$apply(angular.element("body").scope().questionaire.files.file[0].data = imageData);
+        angular.element("body").scope().$apply(angular.element("body").scope().questionaire.files.file[0].data = imageData.toString());
         angular.element("body").scope().questionaire.files.file[0].name = "Image.jpeg";
 
         document.getElementById("image").src = "data:image/jpeg;base64," + imageData;
