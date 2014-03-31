@@ -1,10 +1,13 @@
 /**
- * Created by Daniel on 19.03.14.
+ * @name reportApp
  */
-
 var myMessagesApp = angular.module('reportApp', ['allReportsServices']);
 
-myMessagesApp.controller('reportCtrl', ['$scope', 'ReportService', function ($scope, ReportService) {
+/**
+ * @name reportCtrl
+ * @description is the controller as of MVC for a single report
+ */
+myMessagesApp.controller('reportCtrl', ['$scope', 'ReportService', function($scope, ReportService){
 
     $scope.id = window.location.search.substring(1).split("&")[0].split("=")[1];
 
@@ -18,11 +21,20 @@ myMessagesApp.controller('reportCtrl', ['$scope', 'ReportService', function ($sc
 
     $scope.isCommenting = false;
 
+    /**
+     * @name addComment
+     * @description is the function which would be called from the view to comment a publication or answer a comment
+     * @param {Object} comment the comment which should be answered, if it's a comment then null
+     */
     $scope.addComment = function (comment) {
         $scope.answerComment = comment;
         $scope.isCommenting = true;
     };
 
+    /**
+     * @name sendComment
+     * @description is the function which would be called from the view to send a comment
+     */
     $scope.sendComment = function () {
 
         function success() {
