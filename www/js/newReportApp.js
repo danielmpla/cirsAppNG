@@ -7,7 +7,7 @@ var newReportApp = angular.module('newReportApp', ['allReportsServices']);
  * @name newReportCtrl
  * @description is the controller as of MVC for new reports
  */
-var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'NewReportService',
+newReportApp.controller('newReportCtrl', ['$scope', 'NewReportService',
     function ($scope, NewReportService) {
         $scope.questionaire = NewReportService.getNewReport();
         $scope.reportingAreas = NewReportService.getReportingAreas();
@@ -21,9 +21,6 @@ var newReportCtrl = newReportApp.controller('newReportCtrl', ['$scope', 'NewRepo
             NewReportService.capturePicture();
         };
 
-        $scope.submitForm = function () {
-            if ($scope.timestamp != null) {
-                var dateTime = NewReportService.timestampToStringObject($scope.timestamp);
 		/**
 		 * @name submitFrom
 		 * @description is the function which would be called from the view to send a new report
